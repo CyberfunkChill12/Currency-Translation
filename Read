@@ -1,0 +1,101 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <iomanip>
+using namespace std;
+
+class ctm
+{
+    public:
+    int currency;
+    double amount;
+    double conversion;
+    double fees;
+    double total;
+    void intro();
+};
+
+class amount: public ctm{
+    public:
+    void calc();
+};
+
+class rcpt: public amount{
+    public:
+    void rctype();
+};
+
+void ctm::intro()
+{
+    cout << "Welcome to the Currency Exchange Center" << endl;
+    cout << "Please select the currency you want to exchange" << endl;
+    cout << "1. Yuan" << endl;
+    cout << "2. Euro" << endl;
+    cout << "3. Pounds" << endl;
+    cout << "Enter you choice: ";
+    cin >> currency:
+    while (currency < 1 || currency > 3)
+    {
+        cout << "Invalid entry, Please enter a number between 1-3";
+        cin >> currency;
+    }
+    cout << "Enter the amount of currency needed in exchange: ";
+    cin >> amount;
+    while (amount < 0)
+    {
+        cout << "Invalid entry, Please enter a positive number: ";
+        cin >> amount;
+    }
+}
+
+void amount :: calc()
+{
+    if (currency == 1)
+    {
+        conversion = amount * 0.15;
+        feed = conversion * 0.05;
+        total = conversion + fees;
+    }
+    else if (currency == 2)
+    {
+        conversion = amount * 1.11;
+        fees = conversion * 0.05;
+        total = conversion + fees;
+    }
+    else if (currency == 3)
+    {
+        conversion = amount * 1.29;
+        fees =  conversion * 0.05;
+        total = conversion + fees;
+    }
+}
+
+void rcpt::rctype()
+{
+    ofstream outfile;
+    outfile.open("receipt.txt");
+    outfile << "Amount of exchnage currency: " << fixed << setprecision(2) << amount << endl;
+    outfile << "Conversion fees: " << fixed << setprecision(2) << fees << endl;
+    outfile << "Total amount due: " << fixed << setprecision(2) << total << endl;
+    outfile.close();
+    ifstream infile;
+    infile.open("receipt.txt");
+    string line;
+    while (getline(infile, line)){
+        cout << line << endl;
+    }
+    infile.close();
+    
+
+
+
+int main(
+{
+    //No need to modify main as everything should be handled in the classes
+    rc obj; 
+    obj.ctm::intro();
+    obj.amount::calculations();
+    obj.rctype();
+    
+    return 0;
+}
